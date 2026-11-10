@@ -1,0 +1,16 @@
+MINHA CENTRAL V4 — INSTALAÇÃO NO CELULAR / COMPUTADOR
+
+1. Extraia o ZIP.
+2. Envie os arquivos para a RAIZ do repositório focoduplodigital2026/minha-central no GitHub.
+3. Preserve os arquivos existentes ao substituir apenas pelos arquivos deste pacote.
+4. Aguarde a publicação do GitHub Pages e atualize o site.
+5. Na tela inicial, use o botão “Instalar aplicativo”.
+
+No Android Chrome/Edge compatível: aparecerá a instalação nativa, quando permitida.
+No iPhone: o site mostra instruções de adicionar à tela inicial.
+No computador: instale pelo botão ou pelo menu do Chrome/Edge.
+
+A autenticação do Google e o Supabase foram mantidos.
+NOTIFICAÇÕES PUSH NÃO ESTÃO ATIVAS. A instalação do PWA não configura push no background.
+O service worker somente armazena arquivos estáticos públicos; dados privados não são cacheados.
+Conexão à internet ainda é necessária para login e tarefas na nuvem.
