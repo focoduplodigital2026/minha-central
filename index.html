@@ -1,0 +1,65 @@
+<!doctype html>
+<html lang="pt-BR">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width,initial-scale=1,viewport-fit=cover" />
+  <meta name="theme-color" content="#0b1220" />
+  <meta name="description" content="Minha Central: sua rotina, compromissos e lembretes em um só lugar." />
+  <link rel="manifest" href="manifest.webmanifest" />
+  <link rel="icon" href="icon.svg" type="image/svg+xml" />
+  <link rel="preconnect" href="https://fonts.googleapis.com" />
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+  <link href="https://fonts.googleapis.com/css2?family=DM+Sans:wght@400;500;600;700&family=Outfit:wght@400;500;600;700;800&display=swap" rel="stylesheet" />
+  <link rel="stylesheet" href="styles.css" />
+  <title>Minha Central | Seu dia, sob controle</title>
+</head>
+<body>
+  <div class="app-shell">
+    <aside class="sidebar" id="sidebar">
+      <div class="brand"><div class="brand-icon">✳</div><div><strong>minha<span>central</span></strong><small>ORGANIZE SUA VIDA</small></div></div>
+      <div class="nav-label">ESPAÇO PESSOAL</div>
+      <nav class="nav" id="mainNav" aria-label="Navegação principal">
+        <button class="nav-link active" data-view="dashboard"><span class="nav-icon">◫</span> Visão geral</button>
+        <button class="nav-link" data-view="tasks"><span class="nav-icon">☑</span> Minhas tarefas <span class="nav-count" id="navTaskCount">0</span></button>
+        <button class="nav-link" data-view="calendar"><span class="nav-icon">▦</span> Calendário</button>
+        <button class="nav-link" data-view="reminders"><span class="nav-icon">♧</span> Lembretes</button>
+      </nav>
+      <div class="nav-label spaces-label">MINHAS ÁREAS</div>
+      <nav class="nav" id="areasNav" aria-label="Categorias">
+        <button class="nav-link" data-category="Trabalho"><span class="category-dot" style="--dot:#7d8bff"></span> Trabalho</button>
+        <button class="nav-link" data-category="Casa"><span class="category-dot" style="--dot:#ffb66b"></span> Casa</button>
+        <button class="nav-link" data-category="Moto RUVA"><span class="category-dot" style="--dot:#ff6c78"></span> Moto RUVA</button>
+        <button class="nav-link" data-category="Financeiro"><span class="category-dot" style="--dot:#77d7bb"></span> Financeiro</button>
+        <button class="nav-link" data-category="Agenda"><span class="category-dot" style="--dot:#c29dff"></span> Agenda</button>
+      </nav>
+      <div class="sidebar-bottom"><div class="tip-icon">✦</div><strong>Um dia de cada vez.</strong><p>Tire as ideias da cabeça e coloque tudo aqui.</p><button class="tip-btn" id="sidebarNew">+ Nova tarefa</button></div>
+      <div class="sidebar-footer"><span class="status-dot"></span><span id="storageState">Modo demonstração</span></div>
+    </aside>
+
+    <main class="main">
+      <header class="topbar"><div class="mobile-brand"><button class="icon-btn mobile-menu" id="menuButton" aria-label="Abrir menu">☰</button><strong>minha<span>central</span></strong></div><div class="breadcrumb">ESPAÇO PESSOAL <span>/</span> <b id="breadcrumbText">Visão geral</b></div><div class="top-actions"><span class="today-pill" id="todayLabel"></span><button class="avatar" id="profileButton" title="Conta e sincronização">EU</button></div></header>
+      <div class="page-content">
+        <section class="page" data-page="dashboard">
+          <div class="headline"><div><span class="eyebrow">SEU ESPAÇO DE ORGANIZAÇÃO</span><h1 id="greeting">Bom dia! <span>👋</span></h1><p>O que precisa da sua atenção hoje? Vamos colocar tudo em ordem.</p></div><button class="primary-btn" data-add>+ Adicionar tarefa</button></div>
+          <div class="banner" id="cloudBanner"><div class="banner-icon">☁</div><div><strong>Você está usando a versão de demonstração.</strong><p>Suas tarefas ficam neste navegador. Configure o Supabase para sincronizar na nuvem com sua conta Google.</p></div><button class="banner-btn" id="configureButton">Configurar nuvem →</button></div>
+          <div class="stat-grid"><article class="stat-card"><div class="stat-top"><span>Total pendente</span><span class="stat-symbol purple">☷</span></div><strong id="statPending">0</strong><small>Tarefas esperando por você</small></article><article class="stat-card"><div class="stat-top"><span>Para hoje</span><span class="stat-symbol orange">◷</span></div><strong id="statToday">0</strong><small>Precisam de atenção hoje</small></article><article class="stat-card"><div class="stat-top"><span>Concluídas</span><span class="stat-symbol green">✓</span></div><strong id="statDone">0</strong><small>Você está fazendo acontecer</small></article><article class="stat-card"><div class="stat-top"><span>Atrasadas</span><span class="stat-symbol red">!</span></div><strong id="statOverdue">0</strong><small>Priorize essas tarefas</small></article></div>
+          <div class="dashboard-grid"><section class="panel tasks-panel"><div class="panel-header"><div><h2>Suas prioridades</h2><p>O mais importante, sem distrações</p></div><button class="text-link" data-go="tasks">Ver todas →</button></div><div id="priorityList" class="task-list"></div></section><section class="panel upcoming-panel"><div class="panel-header"><div><h2>Próximos dias</h2><p>O que está chegando</p></div><button class="icon-circle" data-go="calendar" title="Abrir calendário">↗</button></div><div id="upcomingList" class="upcoming-list"></div></section></div>
+          <section class="quick-section"><div class="panel-header"><div><h2>Organize por área</h2><p>Cada parte da sua vida em seu lugar</p></div></div><div class="area-grid" id="areaCards"></div></section>
+        </section>
+
+        <section class="page hidden" data-page="tasks"><div class="headline compact"><div><span class="eyebrow">ORGANIZAÇÃO DO DIA A DIA</span><h1>Minhas tarefas</h1><p>Tudo o que você precisa fazer, em um só lugar.</p></div><button class="primary-btn" data-add>+ Nova tarefa</button></div><section class="panel task-manage"><div class="toolbar"><label class="search-wrap"><span>⌕</span><input type="search" id="taskSearch" placeholder="Buscar uma tarefa..." /></label><select id="taskStatus" aria-label="Filtrar status"><option value="all">Todos os status</option><option value="pending">Pendentes</option><option value="done">Concluídas</option><option value="overdue">Atrasadas</option></select><select id="taskCategory" aria-label="Filtrar categoria"><option value="all">Todas as áreas</option><option>Trabalho</option><option>Casa</option><option>Moto RUVA</option><option>Financeiro</option><option>Agenda</option></select></div><div id="allTaskList" class="task-list expanded"></div></section></section>
+
+        <section class="page hidden" data-page="calendar"><div class="headline compact"><div><span class="eyebrow">SEUS COMPROMISSOS</span><h1>Calendário</h1><p>Visualize prazos, tarefas e eventos em um só lugar.</p></div><button class="primary-btn" data-add>+ Novo compromisso</button></div><div class="calendar-layout"><section class="panel calendar-panel"><div class="calendar-toolbar"><h2 id="calendarTitle">Mês</h2><div class="calendar-actions"><button class="outline-btn" id="calendarToday">Hoje</button><button class="icon-circle" id="calendarPrev" aria-label="Mês anterior">‹</button><button class="icon-circle" id="calendarNext" aria-label="Próximo mês">›</button></div></div><div class="calendar-weekdays"><span>Dom</span><span>Seg</span><span>Ter</span><span>Qua</span><span>Qui</span><span>Sex</span><span>Sáb</span></div><div id="calendarGrid" class="calendar-grid"></div></section><section class="panel day-panel"><div class="panel-header"><div><h2 id="selectedDayTitle">Compromissos do dia</h2><p>Atividades na data selecionada</p></div></div><div id="selectedDayList" class="task-list"></div><div class="google-actions"><button class="outline-btn wide" id="connectGoogleCalendar">↻ Buscar eventos do Google Agenda</button><small>A integração com Google requer login na nuvem e permissão para o calendário.</small></div></section></div></section>
+
+        <section class="page hidden" data-page="reminders"><div class="headline compact"><div><span class="eyebrow">NADA FICA PARA TRÁS</span><h1>Lembretes</h1><p>Confira o que está vencendo e as atividades recorrentes.</p></div><button class="primary-btn" data-add>+ Criar lembrete</button></div><section class="panel reminder-panel"><div class="panel-header"><div><h2>Precisam da sua atenção</h2><p>Tarefas atrasadas ou previstas para os próximos 7 dias</p></div></div><div id="reminderList" class="task-list expanded"></div></section><section class="reminder-tip"><span>🔔</span><div><strong>Sobre notificações</strong><p>Esta versão organiza prazos e lembretes dentro do aplicativo. Alertas automáticos fora do site ainda precisam de um serviço de notificações; os eventos enviados ao Google Agenda podem usar os alertas configurados na sua agenda.</p></div></section></section>
+      </div>
+    </main>
+  </div>
+  <div class="overlay hidden" id="overlay"></div>
+  <dialog id="taskDialog" class="modal"><form id="taskForm" method="dialog"><div class="modal-header"><div><span class="eyebrow">MINHA CENTRAL</span><h2 id="modalTitle">Nova tarefa</h2></div><button type="button" class="close-btn" data-close aria-label="Fechar">×</button></div><div class="modal-body"><label>Título da tarefa <span>*</span><input name="title" id="formTitle" maxlength="160" required placeholder="Ex.: Pagar conta de energia" /></label><label>Descrição (opcional)<textarea name="description" id="formDescription" rows="3" maxlength="1500" placeholder="Detalhes que você não quer esquecer"></textarea></label><div class="form-row"><label>Área<select id="formCategory" name="category"><option>Trabalho</option><option>Casa</option><option>Moto RUVA</option><option>Financeiro</option><option>Agenda</option></select></label><label>Prioridade<select id="formPriority" name="priority"><option value="normal">Normal</option><option value="high">Alta</option><option value="low">Baixa</option></select></label></div><div class="form-row"><label>Data e horário<input id="formDue" name="due" type="datetime-local" /></label><label>Repetição<select id="formRepeat" name="recurrence"><option value="none">Não repetir</option><option value="daily">Todos os dias</option><option value="weekly">Toda semana</option><option value="monthly">Todo mês</option></select></label></div><label class="check-label"><input type="checkbox" id="formSendGoogle" /> Enviar para o Google Agenda ao salvar</label><p class="form-hint">A sincronização exige uma conta Google conectada e uma data definida.</p></div><div class="modal-footer"><button type="button" class="outline-btn" data-close>Cancelar</button><button type="submit" class="primary-btn" id="saveTaskButton">Salvar tarefa</button></div></form></dialog>
+  <dialog id="settingsDialog" class="modal settings-modal"><div class="modal-header"><div><span class="eyebrow">PREFERÊNCIAS</span><h2>Nuvem e conta</h2></div><button type="button" class="close-btn" data-close aria-label="Fechar">×</button></div><div class="modal-body"><div class="account-box" id="accountStatus">Modo demonstração — dados salvos somente neste navegador.</div><p class="setting-description">Para ativar o acesso com Google e a sincronização entre aparelhos, crie um projeto no Supabase, execute o arquivo <b>supabase.sql</b> no editor SQL e informe as credenciais públicas abaixo. Nunca cole uma chave <b>service_role</b> aqui.</p><label>URL do projeto Supabase<input id="supabaseUrl" placeholder="https://seu-projeto.supabase.co" autocomplete="off" /></label><label>Chave pública (publishable / anon)<input id="supabaseKey" placeholder="sb_publishable_... ou anon JWT" autocomplete="off" /></label><div class="setting-actions"><button class="primary-btn" id="saveCloud" type="button">Salvar configuração</button><button class="outline-btn" id="googleSignIn" type="button">Entrar com Google</button><button class="outline-btn hidden" id="googleSignOut" type="button">Sair da conta</button></div><p class="form-hint" id="cloudHelp">Google Login e permissão para Agenda exigem configuração de OAuth no Supabase/Google Cloud. Consulte o README.</p></div></dialog>
+  <div id="toast" class="toast hidden" role="status" aria-live="polite"></div>
+  <script src="https://cdn.jsdelivr.net/npm/@supabase/supabase-js@2/dist/umd/supabase.min.js"></script>
+  <script src="app.js" defer></script>
+</body>
+</html>
